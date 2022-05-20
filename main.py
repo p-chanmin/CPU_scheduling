@@ -35,7 +35,7 @@ def sort_ready(ready : list, now_time : int):
 # 스케줄링 함수
 def scheduling(ready : list, t : int, now_time : int):
     if len(ready)==0:
-        return 0
+        return ready, now_time
     while(t != 0):
         if (ready[0][4] > t):
             ready[0][4] -= t
@@ -47,6 +47,8 @@ def scheduling(ready : list, t : int, now_time : int):
             ready[0][4] = 0
             print(ready.pop(0))
             ready = sort_ready(ready, now_time)
+            if len(ready) == 0:
+                return ready, now_time
     return ready, now_time
 
 
