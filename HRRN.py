@@ -60,7 +60,8 @@ def scheduling(ready : list, t : int, now_time : int, turn_around_time : list, n
 
 #### 프로그램 시작 ####
 # input Data 읽기
-f = open("input.txt", mode='r')
+path = input("input data의 절대경로 입력 : ")
+f = open(path, mode='r')
 # 한 줄 씩 읽으면서 int형으로 변환하여 input_data에 삽입
 input_data = []
 for i in f.readlines():
