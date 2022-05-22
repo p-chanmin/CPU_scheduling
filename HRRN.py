@@ -22,7 +22,7 @@ def end_process(p : list, now_time : int):
     return now_time-p[5], p[6] # turn_around_time, normalized_turnaround_time 반환
 
 # 스케줄링 함수
-# 입력 파라미터 ( 준비큐, 스케줄링 할 시간, 현재 시간, turn_around_time을 저장할 리스트, normalized_turnaround_time을 저장할 리스트  )
+# 입력 파라미터 ( 준비큐, 스케줄링 할 시간, 현재 시간, turn_around_time을 저장할 리스트, normalized_turnaround_time을 저장할 리스트 )
 def scheduling(ready : list, t : int, now_time : int, turn_around_time : list, normalized_turnaround_time : list):
     # 준비큐가 비어있으면 스케줄링 하지 않고 그대로 반환
     if len(ready)==0:
@@ -59,7 +59,6 @@ def scheduling(ready : list, t : int, now_time : int, turn_around_time : list, n
 
 
 #### 프로그램 시작 ####
-
 # input Data 읽기
 f = open("input.txt", mode='r')
 # 한 줄 씩 읽으면서 int형으로 변환하여 input_data에 삽입
@@ -98,14 +97,17 @@ for data in input_data:
         data.append(now_time)     # 초기 arrival_time은 현재 진행시간 t
         data.append(1.0)          # 초기 R(응답 비율)은 1.0
         ready.append(data)        # 준비큐에 삽입
+
     elif data[0] == 1:  # type이 1일 경우 20의 시간이 흐름, 20만큼 스케줄링
         ready, now_time = scheduling(ready, 20, now_time, turn_around_time, normalized_turn_around_time)
+
     else:   # type이 -1, 혹은 그 외 값이 들어올 경우, 입력 종료를 의미
         # 준비큐에 남은 프로세스가 없을 때 까지 스케줄링
         # 이때 HRRN은 비선점 모드이므로 준비큐에서 우선순위가 제일 높은 프로세스의
         # 남은 시간만큼 스케줄링 시작
         while (len(ready) != 0):
             ready, now_time = scheduling(ready, ready[0][4], now_time, turn_around_time, normalized_turn_around_time)
+
 # 스케줄링 완료
 print("----------------------------------------------------------------------------------------")
 print("프로세스 스케줄링 종료")
